@@ -19,7 +19,7 @@ public class FractionTest
 
         var res = new Fraction(num, denom);
         var exp = new Fraction(-3, 4);
-
+        
         assertEqualFract(res, exp);
     }
 
@@ -69,6 +69,32 @@ public class FractionTest
         var exp = new Fraction(40, 7);
 
         assertEqualFract(div, exp);
+    }
+
+    [Theory]
+    [InlineData(-1, 2, true)]
+    [InlineData(1, 2, true)]
+    [InlineData(-2, 2, false)]
+    [InlineData(3, 2, false)]
+    public void IsProperTest(int num, int denom, bool exp)
+    {
+        var f = new Fraction(num, denom);
+
+        var isProper = f.IsProper();
+
+        Assert.Equal(isProper, exp);
+    }
+
+    [Theory]
+    [InlineData(3, 2, "3/2")]
+    [InlineData(4, 1, "4")]
+    public void ToStringTest(int num, int denom, string exp)
+    {
+        var f = new Fraction(num, denom);
+
+        var str = f.ToString();
+
+        Assert.Equal(str, exp);
     }
 }
 
